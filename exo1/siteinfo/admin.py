@@ -4,10 +4,10 @@ from . import models
 
 from django.utils.safestring import mark_safe
 
-
+from actions import Actions
 
 # Register your models here.
-class AcceuilAdmin(admin.ModelAdmin):
+class AcceuilAdmin(Actions):
     fieldsets = [
         ('Presentation',{'fields': ['image','titre']}),
         ('Standard', {'fields': ['description','lien']}),
@@ -29,7 +29,7 @@ class AcceuilAdmin(admin.ModelAdmin):
 
                                                                                                                                   
     
-class LocalisationAdmin(admin.ModelAdmin):
+class LocalisationAdmin(Actions):
     
     fieldsets = [
         ('Presentation',{'fields': ['address','description']}),

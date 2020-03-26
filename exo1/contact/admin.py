@@ -4,11 +4,11 @@ from . import models
 
 from django.utils.safestring import mark_safe
 
-
+from actions import Actions
 
 # Register your models here.                                                                                                                                
     
-class ContactAdmin(admin.ModelAdmin):
+class ContactAdmin(Actions):
     
     fieldsets = [
         ('Presentation',{'fields': ['nom','email']}),

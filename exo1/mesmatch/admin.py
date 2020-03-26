@@ -2,10 +2,10 @@ from django.contrib import admin
 from . import models 
 from django.utils.safestring import mark_safe
 
-
+from actions import Actions
 
 # Register your models here.
-class MatchAdmin(admin.ModelAdmin):
+class MatchAdmin(Actions):
     fieldsets = [
         ('Presentation',{'fields': ['image','nom_equip']}),
         ('Standard', {'fields': ['score']}),
@@ -26,7 +26,7 @@ class MatchAdmin(admin.ModelAdmin):
 
                                                                                                                                   
     
-class InformationAdmin(admin.ModelAdmin):
+class InformationAdmin(Actions):
     
     fieldsets = [
         ('Presentation',{'fields': ['nom','nb_match']}),
@@ -44,7 +44,7 @@ class InformationAdmin(admin.ModelAdmin):
     list_per_page = 10
     
     
-class ClubAdmin(admin.ModelAdmin):
+class ClubAdmin(Actions):
     fieldsets = [
         ('Presentation',{'fields': ['image','nom']}),
         ('Standard', {'fields': ['information_Club','description','nom_player']}),
