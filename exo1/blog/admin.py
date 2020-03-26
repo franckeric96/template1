@@ -4,10 +4,19 @@ from . import models
 
 from django.utils.safestring import mark_safe
 
+from actions import Actions
 
+
+
+
+
+
+class  ArticleInline(admin.TabularInline):
+    model = models.Categorie  
+    extra = 0 
 
 # Register your models here.
-class ArticleAdmin(admin.ModelAdmin):
+class ArticleAdmin(Actions):
     fieldsets = [
         ('Presentation',{'fields': ['image','titre']}),
         ('Standard', {'fields': ['auteur','contenu','categorie_article']}),
@@ -27,11 +36,9 @@ class ArticleAdmin(admin.ModelAdmin):
     def image_views(self,obj):
         return mark_safe("<img src='{url}' width= 100px height=50px >".format(url=obj.image.url))
 
-class  ArticleInline(admin.TabularInline):
-    model = models.Categorie  
-    extra = 0                                                                                                                                 
+                                                                                                                                
 
-class CategorieAdmin(admin.ModelAdmin):
+class CategorieAdmin(Actions):
    
     
     fieldsets = [
@@ -50,22 +57,9 @@ class CategorieAdmin(admin.ModelAdmin):
     Inlines = [ArticleInline]
     
     
-    actions = ('active','deactive')
-    def active(self, request, queryset):
-        queryset.update(status = False)
-        self.message_user(request, 'domi a modifier La selection a été deactivé avec succès')
-
-    active.short_description = 'Desactiver'
-
-    def deactive(self, request, queryset):
-        queryset.update(status = True)
-        self.message_user(request, 'La selection a été activé avec succès')
-
-    deactive.short_description = 'Activer'
-    
 
     
-class TagAdmin(admin.ModelAdmin):
+class TagAdmin(Actions):
     fieldsets = [
         ('Presentation',{'fields': ['nom','description']}),
         ('Status',{'fields': ['status']})
@@ -81,7 +75,7 @@ class TagAdmin(admin.ModelAdmin):
     ordering = ['nom']
     list_per_page = 10
     
-class CommentaireAdmin(admin.ModelAdmin):
+class CommentaireAdmin(Actions):
     fieldsets = [
         ('Presentation',{'fields': ['nom']}),
         ('Contenu',{'fields': ['article','site','commentaire']}),
